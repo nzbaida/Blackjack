@@ -11,3 +11,7 @@ shuffle <- function(deck){
   random <- sample(1:52, size = 52)
   assign("deck", Deck[random,], parent.env(environment()))
 }
+shuffle(deck)
+dealer_card_1 <- deal()
+dealer_card_2 <- deal()
+print(dealer_card_1)
