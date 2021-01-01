@@ -15,3 +15,16 @@ shuffle(deck)
 dealer_card_1 <- deal()
 dealer_card_2 <- deal()
 print(dealer_card_1)
+dealer_card_3 <- NA
+dealer_cards <- list(dealer_card_1, dealer_card_2, dealer_card_3)
+if(dealer_hand < 17){
+  dealer_card_3 <- deal()
+  dealer_hand <- dealer_hand + dealer_card_3$value
+}
+if(dealer_hand > 21){
+  deck$value[deck$face == "ace"] <- 1
+}
+if(dealer_hand > 21){
+  print("dealer busts")
+  print("player wins")
+}
