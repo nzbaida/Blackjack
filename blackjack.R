@@ -1,8 +1,11 @@
+setup <- function(){
   rm(list = ls())
-  #setwd("C:/Users/natty/Desktop/R Practice")
+  setwd("C:/Users/natty/Desktop/R Practice")
   deck <- read.csv("deck.csv")
   deck$value[deck$face == "king" | deck$face == "queen" | deck$face == "jack"] <- 10
   deck$value[deck$face == "ace"] <- 11
+}
+play <- function(){
   deal <- function(){
     assign("deck", deck[-1,], parent.env(environment()))
     card <- deck[1,]
@@ -24,15 +27,15 @@
   if(dealer_hand < 17){
     dealer_card_3 <- deal()
     dealer_hand <- dealer_hand + dealer_card_3$value
+    dealer_cards <- list(dealer_card_1, dealer_card_2, dealer_card_3)
   }
   if(dealer_hand > 21){
     deck$value[deck$face == "ace"] <- 1
   }
-  print(dealer_cards[is.na(c(dealer_cards[[1]],dealer_cards[[2]],dealer_cards[[3]])) == FALSE])
+  print(dealer_cards)
   if(dealer_hand > 21){
     print("player wins")
   }else{
     print("dealer wins") 
   }
-
-  
+}
