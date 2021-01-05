@@ -38,8 +38,33 @@ play <- function(){
       if(dealer_hand > 21){
         deck$value[deck$face == "ace"] <- 1
       }
-      print("dealer cards")
-      print(dealer_cards[is.na(dealer_cards) == FALSE])
+      player_card_1 <- deal()
+      player_card_2 <- deal()
+      print("player cards")
+      print(player_card_1)
+      print(player_card_2)
+      player_card_3 <- NA
+      player_card_4 <- NA
+      player_card_5 <- NA
+      player_card_6 <- NA
+      player_card_7 <- NA
+      player_card_8 <- NA
+      player_card_9 <- NA
+      player_cards <- list(player_card_1, player_card_2, player_card_3, player_card_4, player_card_5, player_card_6, player_card_7,player_card_8, player_card_9)
+      player_hand <- player_card_1$value + player_card_2$value
+      i <- 3
+      while(i < 10){
+        input2 <- readline("type hit for more cards")
+        if(input2 == "hit"){
+          player_cards[[i]] <- deal()
+          player_hand <- player_hand + player_cards[[i]][3]
+        }else{
+          break
+        }
+        print(player_cards[[i]])
+        i <- i + 1
+      }
+      print(player_cards[is.na(player_cards) == FALSE])
       if(dealer_hand > 21){
         print("house busts")
         print("player wins")
