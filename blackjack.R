@@ -64,10 +64,31 @@ play <- function(){
         print(player_cards[[i]])
         i <- i + 1
       }
+      if(player_hand > 21){
+        length <- sum(player_cards[is.na(player_cards) == FALSE])
+        for(i in 1:length){
+          if(is.na(player_cards[[i]][1]) == "ace"){
+            player_cards[[i]][3] <- 1
+          }
+        }
+      }
+      print("player cards")
       print(player_cards[is.na(player_cards) == FALSE])
+      print("dealer cards")
+      print(dealer_cards[is.na(dealer_cards) == FALSE])
+      if(player_hand > dealer_hand & player_hand <= 21){
+        print("player wins")
+      }else if(player_hand < dealer_hand & dealer_hand <= 21){
+        print("house wins")
+      }
       if(dealer_hand > 21){
         print("house busts")
         print("player wins")
+      }else if(player_hand > 21){
+        print("player busts")
+        print("house wins")
+      }else if(player_hand > 21 & player_hand > 21){
+        print("both bust")
       }
     }
   }
