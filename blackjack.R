@@ -1,24 +1,26 @@
 play <- function(){
-  rm(list = ls())
   setwd("C:/Users/natty/Desktop/R Practice")
   deck <- read.csv("deck.csv")
   deck$value[deck$face == "king" | deck$face == "queen" | deck$face == "jack"] <- 10
   deck$value[deck$face == "ace"] <- 11
+  assign("Deck", deck, envir = parent.env(environment()))
+  deal <- function(){
+    assign("Deck", Deck[-1,], parent.env(parent.env(environment())))
+    card <- Deck[1,]
+  }
+  shuffle <- function(deck){
+    Deck <- read.csv("deck.csv")
+    Deck$value[Deck$face == "king" | Deck$face == "queen" | Deck$face == "jack"] <- 10
+    Deck$value[Deck$face == "ace"] <- 11
+    random <- sample(1:52, size = 52)
+    assign("Deck", Deck[random,], parent.env(parent.env(environment())))
+  }
   repeat{
     input1 <- readline("type finish to stop")
     if(input1 == "finish"){
       break
     }else{
-      deal <- function(){
-        assign("deck", deck[-1,], parent.env(environment()))
-        card <- deck[1,]
-      }
-      shuffle <- function(deck){
-        Deck <- read.csv("deck.csv")
-        random <- sample(1:52, size = 52)
-        assign("deck", Deck[random,], parent.env(environment()))
-      }
-      shuffle(deck)
+      shuffle(Deck)
       dealer_card_1 <- deal()
       dealer_card_2 <- deal()
       print("dealer top card")
